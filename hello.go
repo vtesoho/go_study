@@ -1,54 +1,50 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func updateSlice(s []int) {
-	s[0] = 100
+func printSlice(s []int) {
+	fmt.Printf("%v,len=%d, cap= %d\n", s, len(s), cap(s))
 }
 
-//slice不是值类型，是一个视图，引用类型？
 func main() {
-	arr := [...]int{0, 1, 2, 3, 4, 5, 6, 7}
-	// s := arr[2:6]
-	fmt.Println("arr[2:6] =", arr[2:6])
-	fmt.Println("arr[:6] =", arr[:6])
-	s1 := arr[2:]
-	fmt.Println("s1 =", arr[2:])
-	s2 := arr[:]
-	fmt.Println("s2 =", arr[:])
+	fmt.Println("create splie")
+	var s []int // zero value for slice is nil
 
-	fmt.Println("---------- updateSlice  s1")
-	updateSlice(s1)
-	fmt.Println(s1)
-	fmt.Println(arr)
-	fmt.Println("---------- updateSlice  s2")
-	updateSlice(s2)
-	fmt.Println(s2)
-	fmt.Println(arr)
+	for i := 0; i < 100; i++ {
+		printSlice(s)
+		s = append(s, 2*i+1)
+	}
+	fmt.Println(s)
 
-	fmt.Println("---------- s2")
-	fmt.Println(s2)
-	s2 = s2[:5]
-	fmt.Println(s2)
-	s2 = s2[2:]
-	fmt.Println(s2)
+	s1 := []int{2, 4, 6, 8}
+	printSlice(s1)
 
-	fmt.Println("---------- extending slice")
-	arr[0], arr[2] = 0, 2
-	s1 = arr[2:6]
-	s2 = s1[3:5]
-	fmt.Println("s1=", s1)
-	fmt.Println("s2=", s2)
+	//创建一个已知长度的slice
+	s2 := make([]int, 16)
+	printSlice(s2)
+	s3 := make([]int, 10, 32)
+	s3 = append(s3, 20)
+	printSlice(s3)
 
-	fmt.Println("---------- extending slice")
-	arr[0], arr[2] = 0, 2
-	s1 = arr[2:6]
-	s2 = s1[3:5]
-	fmt.Printf("s1=%v, len(s1)=%d cap(s1)=%d\n",
-		s1, len(s1), cap(s1))
-	fmt.Printf("s2=%v, len(s2)=%d cap(s2)=%d\n",
-		s2, len(s2), cap(s2))
+	fmt.Println("copying slice")
+	copy(s2, s1)
+	printSlice(s2)
+
+	fmt.Println("deleting elements from slice")
+	s2 = append(s2[:3], s2[4:]...)
+	printSlice(s2)
+
+	fmt.Println("popping form front")
+	front := s2[0]
+	s2 = s2[1:]
+	fmt.Println(front)
+	printSlice(s2)
+
+	fmt.Println("popping form back")
+	tail := s2[len(s2)-1]
+	s2 = s2[:len(s2)-1]
+
+	fmt.Println(tail)
+	printSlice(s2)
 
 }
