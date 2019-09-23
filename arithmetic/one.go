@@ -2,13 +2,13 @@ package main
 
 import "fmt"
 
-func main() {
-	arrName := [...]int{2, 5, 5, 12}
-	// fmt.Println(arrName[0])
-	var targeta = 10
-	twoSum(arrName, targeta)
+// func main() {
+// 	arrName := [...]int{2, 5, 5, 12}
+// 	// fmt.Println(arrName[0])
+// 	var targeta = 10
+// 	twoSum(arrName, targeta)
 
-}
+// }
 
 func twoSum(nums [4]int, target int) [2]int {
 	var start int
