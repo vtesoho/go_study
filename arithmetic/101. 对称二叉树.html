@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>removeDuplicates</title>
+</head>
+<body>
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+ var isSymmetric = function(root) {
+    if(root === null){
+        return false
+    }
+    if(root.left !== null && root.right !== null){
+        if(root.left.val === root.right.val){
+            if(root.left.left.val !== root.right.right.val || root.left.right.val !== root.right.left.val){
+                return false
+            }    
+        }else{
+            return false
+        }
+    }else{
+        return true
+    }
+    return true
+};
+
+
+console.log(isSymmetric([1,2,2,3,4,4,3]))
+// console.log(isSymmetric([1,2,2,null,3,null,3]))
+</script>
+</body>
+</html>
