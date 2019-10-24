@@ -20,21 +20,16 @@
  * @return {boolean}
  */
  var isSymmetric = function(root) {
-    if(root === null){
-        return false
-    }
-    if(root.left !== null && root.right !== null){
-        if(root.left.val === root.right.val){
-            if(root.left.left.val !== root.right.right.val || root.left.right.val !== root.right.left.val){
-                return false
-            }    
-        }else{
+    if(root === null) return true;
+    const diff = (left,right) => {
+        if(!left && !right){
+            return true;
+        }else if(!left && right || left && !right){
             return false
         }
-    }else{
-        return true
+        return left.val === right.val && diff(left.left,right.right) && diff(left.right,right.left)
     }
-    return true
+    return diff(root.left,root.right)
 };
 
 
