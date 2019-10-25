@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>removeDuplicates</title>
+</head>
+<body>
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function(root) {
+    if(!root) return 0;
+    var a = 0;
+    var b = 0;
+    if(root.left !== null){
+        a += 1+ maxDepth(root.left)
+    }
+    if(!root.right !== null){
+        b += 1 + maxDepth(root.right)
+    }
+    return a>b?a:b;
+};
+
+// [0,2,4,1,null,3,-1,5,1,null,6,null,8]
+</script>
+</body>
+</html>
