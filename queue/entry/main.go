@@ -15,4 +15,7 @@ func main() {
 	fmt.Println(q.IsEmpty())
 	fmt.Println(q.Pop())
 	fmt.Println(q.IsEmpty())
+
+	//q.Push("Abc") //会报错
+	//fmt.Println(q.Pop())
 }
