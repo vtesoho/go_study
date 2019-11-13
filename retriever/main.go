@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go/retriever/mock"
 	real2 "go/retriever/real"
+	"io"
 	"time"
 )
 
@@ -43,6 +44,7 @@ func sesssion(s RetrieverPoster) string {
 }
 
 func main() {
+	io.ReadWriteCloser()
 	var r Retriever
 	retriever := mock.Retriever{"this is vteso.com"}
 	r = &retriever
