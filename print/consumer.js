@@ -30,13 +30,15 @@ const amqpConnect = async ()=>{
             console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
             channel.consume(queue,async function (msg) {
                 console.log(" [x] Received %s", msg.content.toString());
-                
                 let re = await handelMsg.handleAmqp(msg.content)
                 if(re) {
+                    await updataServer.printStatus(handleData.msg_id,true)
                     //确认ACK
                     console.log(" 确认ACK ");
                     channel.ack(msg);
                 }else{
+                    let handleData = JSON.parse(msg.content)
+                    await updataServer.printStatus(handleData.msg_id,false)
                     console.log(" 打印出错 ");
                 }
                 // console.log("测试环境全部确认ack");

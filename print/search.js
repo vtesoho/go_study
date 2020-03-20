@@ -97,6 +97,24 @@ async function searchIP (text){
   return printList
 }
 
+exports.pingLocatPrinter = async () => {
+  let printList = await jsonWrite.jsonRead()
+  let ipList = []
+  await Promise.all(printList.map(async (item)=>{
+    let a = await exports.pingPort(item)
+    console.log(item,a)
+    if(a){
+      ipList.push({key:item.key,online:true})
+    }
+  }))
+  console.log('pingLocatPrinter')
+  return ipList
+
+}
+
+
+
+
 //根据ip获取mac地址 
 async function IPSearchMac(ip){
   const { stdout, stderr } = await exec(`sudo nmap -sP -PT ${ip} |grep "MAC Address: .*(Unknown)" |awk '{print $3}'`)

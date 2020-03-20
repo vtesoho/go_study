@@ -57,6 +57,7 @@ const pointLocationNum = (str,num) => {
 
 exports.testPrint = async (ip,content)=>{
   let pingPortRe = await searchPrint.pingPort(ip)
+  console.log('执行的第几次start',content)
   if(pingPortRe === false){
     return false
   }
@@ -69,53 +70,21 @@ exports.testPrint = async (ip,content)=>{
         console.log('return new Promise - error:', error);
         if (error) {
           reject(false);
-        } else {
-          resolve(true);
         }
         printer.font('A')
         printer.align('CT')
         printer.style('BU')
-        printer.size(2, 2)
-        printer.text(`${content.shop_name}`)
         printer.align('LT')
         printer.size(1, 1)
-        printer.text(`桌号：${content.table}`)
-        printer.text(`用桌人数：${content.user_amount}`)
-        printer.text('-----------------------------------------------')
-        printer.text(`${complementString('序号',4,'LT')} ${complementString('菜名',28,'LT')} ${complementString('数量',4,'LT')} ${complementString('价格',8,'RT')}`)
-        // printer.tableCustom([
-        //   {text:`序号`,align:"LEFT",width:0.10},
-        //   {text:`菜名`,align:"LEFT",width:0.30},
-        //   {text:`数量`,align:"LEFT",width:0.10},
-        //   {text:`价格`,align:"RIGHT",width:0.15},
-        // ])
-        try {
-          content.dishes.map((item,index) => {
-            // printer.tableCustom([
-            //   {text:`${index}`,align:"LEFT",width:0.10},
-            //   {text:`${item.name}`,align:"LEFT",width:0.30},
-            //   {text:`${item.amount}`,align:"LEFT",width:0.10},
-            //   {text:`${item.price}`,align:"RIGHT",width:0.15},
-            // ])
-            printer.text(`${complementString(`${index}`,4,'LT')} ${complementString(`${item.name}`,28,'LT')} ${complementString(`${item.amount}`,4,'LT')} ${complementString(`${item.price}`,8,'RT')}`)
-          })
-        } catch (error) {
-          
-        }
-        
-        printer.align('RT')
-        printer.text(`总价：${content.total}`)
-        printer.align('LT')
-        printer.text(' ')
-        printer.text('-----------------------------------------------')
-        printer.text(' ')
-        printer.text(`点餐时间：${content.day} ${content.time}`)
-        printer.text(' ')
+        printer.text(`这是测试`)
         printer.text(' ')
         printer.cut()
         // printer.close();
+        console.log('执行的第几次end',content)
+        resolve(true);
       });
     } catch (error) {
+      console.log('open print error',error)
       reject(false);
     }
     

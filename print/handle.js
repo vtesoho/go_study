@@ -99,13 +99,31 @@ exports.handleAmqp = async (data) =>{
             // console.log('print',ip)
         break;
         case 'report_printer':
-            let re = await updataServer.updataServer()
-            console.log('report_printer',re)
-            if(re === true){
-                return true
-            }else{
-                return false
+
+            if(handleData.search_type === 'all'){
+                // let re = await updataServer.updataServer()
+                let re = await updataServer.updataLocalPrintServer()
+                console.log('report_printer all',re)
+                if(re === true){
+                    return true
+                }else{
+                    return false
+                }
+                
             }
+
+            if(handleData.search_type === 'local'){
+                let re = await updataServer.updataLocalPrintServer()
+                console.log('report_printer all',re)
+                if(re === true){
+                    return true
+                }else{
+                    return false
+                }
+                
+            }
+            
+            
         break;
     }
 }

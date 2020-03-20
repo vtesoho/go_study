@@ -1,3 +1,4 @@
+const print = require("./print")
 let text = `
 Starting Nmap 7.40 ( https://nmap.org ) at 2020-03-06 09:54 UTC
 Nmap scan report for 192.168.1.1 (192.168.1.1)
@@ -99,7 +100,7 @@ complementString = (str,num,type) => {
     
 }
 
-console.log(complementString(testAllPrint.content.dishes[0].name,50,"RT"))
+// console.log(complementString(testAllPrint.content.dishes[0].name,50,"RT"))
 
 pointLocationNum = (str,num) => {
     let re = /[\u4E00-\u9FA5]/g;
@@ -115,4 +116,15 @@ pointLocationNum = (str,num) => {
     }
 }
 
-console.log(pointLocationNum('番茄红油鸳鸯锅',20))
+// console.log(pointLocationNum('番茄红油鸳鸯锅',20))
+
+
+testPrintCache = async () => {
+    let ip = '192.168.1.243'
+    for (let i = 0; i < 10; i++) {
+        await print.testPrint(ip,i)
+    }
+    
+}
+
+testPrintCache()
